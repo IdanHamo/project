@@ -2,8 +2,9 @@ import Input from "./input";
 import { useFormik } from "formik";
 import Joi from "joi";
 import { useNavigate } from "react-router-dom";
+import { createUser } from "../../services/userService";
 
-const Registration = () => {
+const Registration = ({ redirect }) => {
   const navigate = useNavigate();
   const form = useFormik({
     validateOnMount: true,
@@ -35,9 +36,19 @@ const Registration = () => {
       return errors;
     },
 
-    onSubmit(values) {
-      console.log(values);
-      navigate("/login");
+    async onSubmit(values) {
+      try {
+        const response = await createUser(values);
+
+        if (redirect) {
+          navigate(redirect);
+        }
+        console.log("success", response);
+      } catch ({ response }) {
+        if (response?.status === 400) {
+          console.log("failed");
+        }
+      }
     },
   });
 

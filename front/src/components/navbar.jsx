@@ -8,7 +8,7 @@ const Navbar = () => {
         <Link to="home">
           <img
             className="logoImg"
-            src="https://unitysro.net/wp-content/themes/armadon/assets/images/logos/logo-icon.svg"
+            src="	https://unitysro.net/wp-content/themes/armadon/assets/images/logos/logo-icon.svg"
             alt="logo"
           />
         </Link>
