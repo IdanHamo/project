@@ -43,7 +43,7 @@ const Login = () => {
       <form noValidate className="form-signin" onSubmit={form.handleSubmit}>
         <img
           className="mb-4 logo bg-dark"
-          src="	https://unitysro.net/wp-content/themes/armadon/assets/images/logos/logo-icon.svg"
+          src="https://unitysro.net/wp-content/themes/armadon/assets/images/logos/logo-icon.svg"
           alt=""
           width="72"
           height="72"

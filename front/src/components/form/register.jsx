@@ -15,11 +15,11 @@ const Registration = ({ redirect }) => {
     },
     validate(values) {
       const { error } = Joi.object({
+        userName: Joi.string().min(2).required(),
         email: Joi.string()
           .email({ tlds: { allow: false } })
           .required(),
         password: Joi.string().min(6).required(),
-        userName: Joi.string().min(2).required(),
       }).validate(values, {
         abortEarly: false,
       });
@@ -38,7 +38,7 @@ const Registration = ({ redirect }) => {
 
     async onSubmit(values) {
       try {
-        const response = await createUser(values);
+        const response = await createUser({ ...values });
 
         if (redirect) {
           navigate(redirect);
@@ -70,6 +70,7 @@ const Registration = ({ redirect }) => {
         <h1 className="h3 mb-3 font-weight-normal">Registration</h1>
         <Input
           type="text"
+          name="userName"
           label="User Name"
           error={form.touched.userName && form.errors.userName}
           {...form.getFieldProps("userName")}

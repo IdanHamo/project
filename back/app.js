@@ -15,6 +15,6 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/users", users);
-const port = 3000;
+const port = 3100;
 
 app.listen(port, () => console.log("listening to port" + port));
