@@ -1,5 +1,11 @@
+import FirstSection from "./homepage/sectionOne";
+
 const Home = () => {
-  return <div className="container">Home</div>;
+  return (
+    <div>
+      <FirstSection></FirstSection>
+    </div>
+  );
 };
 
 export default Home;

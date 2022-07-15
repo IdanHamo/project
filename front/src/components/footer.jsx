@@ -4,6 +4,7 @@ const Footer = () => {
       <span>&copy;</span>
       <span>{new Date().getFullYear()}</span>
     </div>
+    
   );
 };
 

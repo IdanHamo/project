@@ -64,3 +64,11 @@ a {
   padding: 15px;
   margin: auto;
 }
+
+.sectionOne {
+  min-height: 90vh;
+  background-image: url("../public/background2.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
