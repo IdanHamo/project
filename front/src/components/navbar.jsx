@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <nav className="container nav">
       <div className="list-container">
-        <Link to="home">
+        <Link to="/">
           <img
             className="logoImg"
             src="https://unitysro.net/wp-content/themes/armadon/assets/images/logos/logo-icon.svg"

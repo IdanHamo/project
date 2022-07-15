@@ -3,8 +3,10 @@ import { useFormik } from "formik";
 import Joi from "joi";
 import { useNavigate } from "react-router-dom";
 import { createUser } from "../../services/userService";
+import { useState } from "react";
 
 const Registration = ({ redirect }) => {
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const form = useFormik({
     validateOnMount: true,
@@ -38,15 +40,17 @@ const Registration = ({ redirect }) => {
 
     async onSubmit(values) {
       try {
+        console.log(values);
         const response = await createUser({ ...values });
 
         if (redirect) {
           navigate(redirect);
         }
+
         console.log("success", response);
       } catch ({ response }) {
         if (response?.status === 400) {
-          console.log("failed");
+          setError(response.data);
         }
       }
     },
@@ -60,6 +64,8 @@ const Registration = ({ redirect }) => {
         className="form-signup"
         onSubmit={form.handleSubmit}
       >
+        {error ? <div className="alert alert-danger">{error}</div> : null}
+
         <img
           className="my-4 logo bg-dark"
           src="https://unitysro.net/wp-content/themes/armadon/assets/images/logos/logo-icon.svg"

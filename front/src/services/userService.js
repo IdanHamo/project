@@ -1,18 +1,18 @@
 import httpService from "./httpService";
 
-const storageKeyToken = "token";
+const tokenKey = "token";
 
 export function createUser(user) {
   return httpService.post("/users", user);
 }
 
-export function loginUser(values) {
+export async function signInUser(values) {
   const { data } = await httpService.post("/auth", values);
-   localStorage.setItem(storageKeyToken, data.token);
+  localStorage.setItem(tokenKey, data);
 }
 
 const userService = {
   createUser,
-  loginUser,
+  signInUser,
 };
 export default userService;

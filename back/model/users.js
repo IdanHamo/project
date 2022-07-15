@@ -27,13 +27,12 @@ const userSchema = new mongoose.Schema({
     default: Date.now,
   },
 });
-
-const User = mongoose.model("User", userSchema);
-
-userSchema.methods.generateAuthToken = function () {
-  const token = jwt.sign({ _id: this._id }, config.get("jwtKey"));
+userSchema.methods.generateAuthToken = function generateAuthToken() {
+  const token = jwt.sign({ _id: this._id }, config.get("key"));
   return token;
 };
+
+const User = mongoose.model("User", userSchema);
 
 function userValidation(values) {
   const schema = Joi.object({

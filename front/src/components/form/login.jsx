@@ -3,10 +3,12 @@ import Joi from "joi";
 import { useNavigate } from "react-router-dom";
 import Input from "./input";
 
-import userService, { loginUser } from "../../services/userService";
-import httpService from "../../services/httpService";
+import { signInUser } from "../../services/userService";
+import { useState } from "react";
 
-const Login = () => {
+const Login = ({ redirect }) => {
+  const [error, setError] = useState();
+
   const navigate = useNavigate();
   const form = useFormik({
     validateOnMount: true,
@@ -35,14 +37,18 @@ const Login = () => {
 
       return errors;
     },
-
     async onSubmit(values) {
       try {
-        await loginUser(values);
+        await signInUser(values);
+
+        if (redirect) {
+          navigate(redirect);
+        }
       } catch ({ response }) {
-        console.log(response);
+        if (response) {
+          setError(response.data);
+        }
       }
-      navigate("/home");
     },
   });
   return (
@@ -56,6 +62,7 @@ const Login = () => {
           height="72"
         />
         <h1 className="h3 mb-3 font-weight-normal">Login</h1>
+        {error ? <div className="alert alert-danger">{error}</div> : null}
 
         <Input
           name="email"
