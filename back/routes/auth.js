@@ -9,6 +9,14 @@ router.post("/", async (req, res) => {
 
   if (error) return res.status(400).send(error);
   const user = await User.findOne({ email: req.body.email });
+  if (!user) return res.status(400).send("user doesn't exist");
+
+  const checkPassword = await bcrypt.compare(user.password, req.body.password);
+  if (!checkPassword)
+    return res.status(400).send("Email / password are incorrect");
+
+  const token = user.generateAuthToken();
+  res.status(200).send(token);
 });
 
 function validation(values) {
@@ -19,3 +27,5 @@ function validation(values) {
 
   return schema.validate(values);
 }
+
+module.exports = router;

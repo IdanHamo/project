@@ -3,6 +3,9 @@ import Joi from "joi";
 import { useNavigate } from "react-router-dom";
 import Input from "./input";
 
+import userService, { loginUser } from "../../services/userService";
+import httpService from "../../services/httpService";
+
 const Login = () => {
   const navigate = useNavigate();
   const form = useFormik({
@@ -33,8 +36,12 @@ const Login = () => {
       return errors;
     },
 
-    onSubmit(values) {
-      console.log(values);
+    async onSubmit(values) {
+      try {
+        await loginUser(values);
+      } catch ({ response }) {
+        console.log(response);
+      }
       navigate("/home");
     },
   });
